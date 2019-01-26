@@ -27,6 +27,16 @@ public class Budget {
     @OneToMany(mappedBy = "budget")
     private List<Expense> expenses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "budget")
+    // coś trzeba by zrobić z tym eager
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "budget")
     private List<Category> categories = new ArrayList<>();
+
+    public Budget() {
+    }
+
+    public Budget(LocalDate startDate, LocalDate endDate, double expenditureLimit) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.expenditureLimit = expenditureLimit;
+    }
 }

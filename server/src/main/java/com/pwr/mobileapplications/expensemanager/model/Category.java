@@ -25,7 +25,12 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Expense> expenses = new ArrayList<>();
 
+    public Category() {
+    }
 
-
+    public Category(String name, Budget budget) {
+        this.name = name;
+        this.budget = budget;
+    }
 }
 

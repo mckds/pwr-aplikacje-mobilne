@@ -28,5 +28,14 @@ public class Account {
 
     @OneToMany(mappedBy = "account")
     private List<Expense> expenses = new ArrayList<>();
+
+    public Account() {
+    }
+
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
 }
 
