@@ -13,12 +13,13 @@ import java.util.List;
 @Setter
 public class Budget {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int budgetId;
+    @GeneratedValue
+    private long budgetId;
 
     private LocalDate startDate;
     private LocalDate endDate;
-    private double limit;
+
+    private double expenditureLimit;
 
     @OneToMany(mappedBy = "budget")
     private List<Account> accounts = new ArrayList<>();

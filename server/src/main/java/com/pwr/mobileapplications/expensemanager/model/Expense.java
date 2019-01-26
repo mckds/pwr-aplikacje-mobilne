@@ -23,6 +23,11 @@ public class Expense {
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "budget_id")
+    private Budget budget;
 }
+

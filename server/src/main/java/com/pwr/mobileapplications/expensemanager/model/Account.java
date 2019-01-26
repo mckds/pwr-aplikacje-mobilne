@@ -23,9 +23,10 @@ public class Account {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
+    @JoinColumn(name = "budget_id")
     private Budget budget;
 
     @OneToMany(mappedBy = "account")
     private List<Expense> expenses = new ArrayList<>();
 }
+
