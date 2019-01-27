@@ -29,5 +29,21 @@ public class Expense {
     @ManyToOne
     @JoinColumn(name = "budget_id")
     private Budget budget;
+
+    public Expense() {
+    }
+
+    public Expense(double amount, LocalDate date) {
+        this.amount = amount;
+        this.date = date;
+    }
+
+    public Expense(double amount, LocalDate date, Account account, Category category, Budget budget) {
+        this.amount = amount;
+        this.date = date;
+        this.account = account;
+        this.category = category;
+        this.budget = budget;
+    }
 }
 
