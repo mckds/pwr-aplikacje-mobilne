@@ -1,0 +1,15 @@
+mat-form-field {
+    width: 100%;
+}
+
+.login-form {
+    padding-top: 100px;
+    width: 300px;
+    display: inline-block;
+    text-align: left;
+}
+
+.login-form-wrapper {
+   
+    text-align: center;
+}
