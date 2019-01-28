@@ -4,4 +4,5 @@ import com.pwr.mobileapplications.expensemanager.model.Account;
 
 public interface AccountService {
     Account findByUsername(String username);
+    Account save(Account account);
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -23,9 +24,9 @@ public class ExpenseManagerApplication {
 	}
 
 	@Bean
-	public CommandLineRunner run(AccountRepository accountRepository, BudgetRepository budgetRepository, CategoryRepository categoryRepository, ExpenseRepository expenseRepository) {
+	public CommandLineRunner run(PasswordEncoder passwordEncoder, AccountRepository accountRepository, BudgetRepository budgetRepository, CategoryRepository categoryRepository, ExpenseRepository expenseRepository) {
 		return (args) -> {
-			Account account = new Account("user", "user");
+			Account account = new Account("user", passwordEncoder.encode("user"));
 			account = accountRepository.save(account);
 
 			Budget budget = new Budget(LocalDate.now(), LocalDate.now(), 1000.0);
