@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
@@ -27,9 +29,30 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account findById(Long id) {
+        return accountRepository.findById(id)
+                .orElseThrow(() ->  new AccountNotFoundException("Account with id `" + id + "` not found."));
+    }
+
+    @Override
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
+    @Override
     public Account save(Account account) {
         account.setPassword(passwordEncoder.encode(account.getPassword()));
         return accountRepository.save(account);
 
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        if(!accountRepository.existsById(id)) {
+            return false;
+        }
+
+        accountRepository.deleteById(id);
+        return true;
     }
 }
