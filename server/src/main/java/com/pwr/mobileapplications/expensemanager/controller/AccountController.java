@@ -1,19 +1,22 @@
 package com.pwr.mobileapplications.expensemanager.controller;
 
 
-import com.pwr.mobileapplications.expensemanager.dto.BudgetGetDto;
-import org.springframework.web.bind.annotation.*;
+import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/accounts")
 public class AccountController {
 
 
-    @GetMapping("{accountId}/budget/{budgetId}")
-    public List<BudgetGetDto> getBudgets(@PathVariable Long accountId, @PathVariable Long budgetId) {
-        return Collections.emptyList();
-    }
+	@GetMapping("budgets/{budgetId}")
+	public List<BudgetDto> getBudgets(@PathVariable Long accountId, @PathVariable Long budgetId) {
+		return Collections.emptyList();
+	}
 }
