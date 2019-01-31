@@ -14,12 +14,13 @@ import java.util.List;
 public class Budget {
     @Id
     @GeneratedValue
-    private long budgetId;
+    private Long budgetId;
 
+    @Column(length = 50, unique = true)
+    private String name;
     private LocalDate startDate;
     private LocalDate endDate;
-
-    private double expenditureLimit;
+    private Double expenditureLimit;
 
     @OneToMany(mappedBy = "budget")
     private List<Account> accounts = new ArrayList<>();
