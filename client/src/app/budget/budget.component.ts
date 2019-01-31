@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetComponent implements OnInit {
 
-  budget: Budget;
+  budgets: Budget[];
 
   constructor(private budgetService: BudgetService) { }
 
@@ -18,8 +18,8 @@ export class BudgetComponent implements OnInit {
   }
 
   getBudget(): void {
-    this.budgetService.getBudget(1)
-    .subscribe(budget => this.budget = budget);
+    this.budgetService.getBudgets()
+    .subscribe(budgets => this.budgets = budgets);
   }
 
 }

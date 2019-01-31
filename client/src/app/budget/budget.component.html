@@ -1,6 +1,8 @@
 <p>
   budget works!
 </p>
-<div class="details" *ngIf="hero">
-<p>{{budget.startDate}} {{budget.endDate}} {{budget.expenditureLimit}}</p>
-</div>
+<ul class="budgets">
+  <li *ngFor="let budget of budgets">
+    <p>{{budget.id}}, {{budget.name}} ,{{budget.startDate}}, {{budget.endDate}}, {{budget.expenditureLimit}}</p>
+  </li>
+</ul>
