@@ -16,7 +16,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long accountId;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 50)
     private String username;
 
     @Column(nullable = false)

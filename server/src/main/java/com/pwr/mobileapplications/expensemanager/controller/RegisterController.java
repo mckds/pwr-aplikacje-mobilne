@@ -7,7 +7,6 @@ import com.pwr.mobileapplications.expensemanager.model.Account;
 import com.pwr.mobileapplications.expensemanager.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

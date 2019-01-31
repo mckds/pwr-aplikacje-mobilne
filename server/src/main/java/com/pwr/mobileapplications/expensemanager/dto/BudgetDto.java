@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class BudgetDto {
 
 	private static final ModelMapper modelMapper = new ModelMapper();
-
+	private Long id;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Double expenditureLimit;

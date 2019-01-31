@@ -7,9 +7,7 @@ import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collections;
 import java.util.Date;
-import java.util.Optional;
 
 import static java.util.Collections.emptyList;
 
@@ -65,8 +63,9 @@ public class AuthenticationService {
                     .getBody()
                     .getSubject();
 
-            if (user != null)
+            if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, emptyList());
+            }
         }
         return null;
     }
