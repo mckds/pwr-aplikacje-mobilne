@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
+import static java.util.Collections.emptyList;
+
 /**
  * Authentication using JWT
  */
@@ -55,15 +57,17 @@ public class AuthenticationService {
      * @return Authentication object authenticated with credentials from JWT
      */
     public static Authentication getAuthentication(HttpServletRequest req) {
-        Optional.ofNullable(req.getHeader("Authorization"))
-                .ifPresent(token -> {
-                    Optional.ofNullable(Jwts.parser()
+        String token = req.getHeader("Authorization");
+        if (token != null) {
+            String user = Jwts.parser()
                     .setSigningKey(SIGNING_KEY)
                     .parseClaimsJws(token.replace(PREFIX, ""))
                     .getBody()
-                    .getSubject())
-                    .ifPresent(subject -> new UsernamePasswordAuthenticationToken(subject, null, Collections.emptyList()));
-                });
+                    .getSubject();
+
+            if (user != null)
+                return new UsernamePasswordAuthenticationToken(user, null, emptyList());
+        }
         return null;
     }
 
