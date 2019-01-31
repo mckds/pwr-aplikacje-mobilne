@@ -1,0 +1,20 @@
+<mat-toolbar color="primary" *ngIf="user">
+  <mat-toolbar-row>
+    <span>Expense Manager</span>
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+
+    <span class="user-label" *ngIf="user">{{user.username}}</span>
+    <button mat-raised-button (click)="onLogout()">Logout</button>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <!-- This fills the remaining space of the current row -->
+    <span class="fill-remaining-space"></span>
+      <mat-button-toggle-group #group="matButtonToggleGroup" (click)="onToggleSelected(group.value)">
+          <mat-button-toggle value="budget">Budget</mat-button-toggle>
+          <mat-button-toggle value="categories">Categories</mat-button-toggle>
+          <mat-button-toggle value="expenses">Expenses</mat-button-toggle>
+          <mat-button-toggle value="users">Users</mat-button-toggle>
+        </mat-button-toggle-group>
+  </mat-toolbar-row>
+</mat-toolbar>
