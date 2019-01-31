@@ -26,4 +26,11 @@ class BudgetController {
 	public ResponseEntity<BudgetDto> createNewBudget(@RequestBody BudgetDto budget) {
 		return ResponseEntity.ok(budgetService.addNewBudget(budget));
 	}
+
+	@PutMapping("/")
+	public ResponseEntity<BudgetDto> addAccountToBudget(@RequestBody BudgetDto budget) {
+		return ResponseEntity.ok(budgetService.addNewBudget(budget));
+	}
+
+
 }
