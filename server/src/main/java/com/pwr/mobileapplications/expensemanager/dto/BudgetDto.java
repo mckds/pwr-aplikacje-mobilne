@@ -13,6 +13,7 @@ public class BudgetDto {
 
 	private static final ModelMapper modelMapper = new ModelMapper();
 	private Long id;
+	private String name;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Double expenditureLimit;
