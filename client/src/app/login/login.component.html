@@ -7,18 +7,18 @@
       </mat-card-header>
       <mat-card-content>
         <mat-form-field>
-          <input matInput placeholder="Username">
+          <input matInput placeholder="Username" #username >
         </mat-form-field>
         <br />
         <mat-form-field>
-          <input type="password" matInput placeholder="Password">
+          <input type="password" matInput placeholder="Password" #password >
         </mat-form-field>
         <br />
-        <button mat-raised-button color="primary">Sign in</button>
+        <button mat-raised-button color="primary" (click)="onSignIn(username.value, password.value)">Sign in</button>
       </mat-card-content>
       <hr />
       <mat-card-subtitle>New user</mat-card-subtitle>
-      <button mat-raised-button>Sign up</button>
+      <button mat-raised-button (click)="onSignUp(username.value, password.value)">Sign up</button>
     </mat-card>
   </div>
 </div>
