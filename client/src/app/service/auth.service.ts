@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from "../../environments/environment";
+import { environment } from '../../environments/environment';
 import { Subject, Observable } from 'rxjs';
 
 
@@ -36,18 +36,21 @@ export class AuthService {
         .toPromise();
 
         // check if request was succesful
-        if(result && result.status == 200 && result.headers.has("Authorization")) {
+        if (result && result.status === 200 && result.headers.has('Authorization')) {
             const user: UserCredentials = {
                 username,
                 password,
-                token: result.headers.get("Authorization")
-            }
+                token: result.headers.get('Authorization')
+            };
+            console.log(user.username);
+            console.log(user.password);
+            console.log(user.token);
 
             // save credentials
-            localStorage.setItem("currentUser", JSON.stringify(user));
+            localStorage.setItem('currentUser', JSON.stringify(user));
 
             // notify observers
-            this.user.next(user); 
+            this.user.next(user);
 
             return user;
         } else {
@@ -65,7 +68,7 @@ export class AuthService {
         const registerResult = await this.http.post<any>(`${environment.apiUrl}/register`, {username, password}).toPromise();
 
         // if request was succesful
-        if(registerResult) {
+        if (registerResult) {
             // then login user after registration
             const loginResult = await this.login(username, password);
             return loginResult;
@@ -86,7 +89,7 @@ export class AuthService {
      */
     logout() {
         // remove from local storage
-        localStorage.removeItem("currentUser");
+        localStorage.removeItem('currentUser');
 
         // notify observers about logged out user
         this.user.next(undefined);
@@ -97,6 +100,6 @@ export class AuthService {
      * @returns is user logged in
      */
     isLoggedIn() {
-        return localStorage.getItem("currentUser");
+        return localStorage.getItem('currentUser');
     }
 }

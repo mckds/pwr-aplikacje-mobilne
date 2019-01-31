@@ -1,3 +1,5 @@
+import { BudgetService } from './../service/bugdet/budget.service';
+import { Budget } from './../service/bugdet/budget';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetComponent implements OnInit {
 
-  constructor() { }
+  budget: Budget;
+
+  constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
+    this.getBudget();
+  }
+
+  getBudget(): void {
+    this.budgetService.getBudget(1)
+    .subscribe(budget => this.budget = budget);
   }
 
 }
