@@ -22,6 +22,11 @@ export class BudgetService {
     );
   }
 
+  getBudgets(): Observable<Budget[]> {
+    const url = `${this.url}`;
+    return this.http.get<Budget[]>(url);
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
