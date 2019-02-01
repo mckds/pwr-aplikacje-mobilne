@@ -1,4 +1,4 @@
-package com.pwr.mobileapplications.expensemanager.controller.budget;
+package com.pwr.mobileapplications.expensemanager.controller;
 
 import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
 import com.pwr.mobileapplications.expensemanager.service.BudgetService;
@@ -33,6 +33,7 @@ class BudgetController {
 	public ResponseEntity<List<BudgetDto>> getAll() {
 		return ResponseEntity.ok(budgetService.findAll());
 	}
+
 	@PutMapping("/budgets")
 	public ResponseEntity<BudgetDto> addAccountToBudget(@RequestBody BudgetDto budget) {
 		return ResponseEntity.ok(budgetService.addNewBudget(budget));
