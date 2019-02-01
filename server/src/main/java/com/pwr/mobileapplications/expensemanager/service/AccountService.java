@@ -1,7 +1,13 @@
 package com.pwr.mobileapplications.expensemanager.service;
 
-import com.pwr.mobileapplications.expensemanager.model.Account;
+import com.pwr.mobileapplications.expensemanager.dto.AccountDto;
+import com.pwr.mobileapplications.expensemanager.dto.AccountRegisterDto;
 
-public interface AccountService extends AbstractCrudService<Account, Long> {
-    Account findByUsername(String username);
+import java.util.List;
+
+public interface AccountService {
+    AccountDto findByUsername(String username);
+    List<AccountDto> findAll();
+    AccountDto save(AccountRegisterDto dto);
+    AccountDto deleteByName(String name);
 }

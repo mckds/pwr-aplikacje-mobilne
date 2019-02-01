@@ -68,4 +68,5 @@ public class CategoryServiceImplTest {
 		dto.setName("food");
 		categoryService.addNewCategory(dto);
 	}
+
 }

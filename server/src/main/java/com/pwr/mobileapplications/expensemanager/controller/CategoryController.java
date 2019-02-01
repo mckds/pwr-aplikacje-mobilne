@@ -7,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
 	private final CategoryService categoryService;
@@ -20,27 +21,27 @@ public class CategoryController {
 		this.categoryService = categoryService;
 	}
 
-	@GetMapping("/categories")
+	@GetMapping()
 	public ResponseEntity<List<CategoryDto>> getAll(){
 		return ResponseEntity.ok(categoryService.findAll());
 	}
 
-	@GetMapping("/categories/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<CategoryDto> getById(@PathVariable Long id){
 		return ResponseEntity.ok(categoryService.findById(id));
 	}
 
-	@PutMapping("/categories")
-	public ResponseEntity<CategoryDto> editCategoryName(@RequestBody EditCategoryDto dto){
+	@PutMapping()
+	public ResponseEntity<CategoryDto> editCategoryName(@RequestBody @Valid EditCategoryDto dto){
 		return ResponseEntity.ok(categoryService.editCategory(dto));
 	}
 
-	@PostMapping("/categories")
+	@PostMapping()
 	public ResponseEntity<CategoryDto> addCategory(@RequestBody CategoryDto dto){
 		return ResponseEntity.ok(categoryService.addNewCategory(dto));
 	}
 
-	@DeleteMapping("/categories")
+	@DeleteMapping()
 	public ResponseEntity<CategoryDto> deleteCategory(@RequestBody CategoryDto dto){
 		return ResponseEntity.ok(categoryService.deleteByName(dto.getName()));
 	}

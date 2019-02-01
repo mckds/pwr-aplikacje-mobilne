@@ -1,9 +1,11 @@
 package com.pwr.mobileapplications.expensemanager.service.implementation;
 
+import com.mysql.cj.util.StringUtils;
 import com.pwr.mobileapplications.expensemanager.dto.CategoryDto;
 import com.pwr.mobileapplications.expensemanager.dto.EditCategoryDto;
 import com.pwr.mobileapplications.expensemanager.exception.CategoryAlreadyExistsException;
 import com.pwr.mobileapplications.expensemanager.exception.CategoryNotFoundException;
+import com.pwr.mobileapplications.expensemanager.exception.InvalidCategoryNameException;
 import com.pwr.mobileapplications.expensemanager.model.Category;
 import com.pwr.mobileapplications.expensemanager.repository.CategoryRepository;
 import com.pwr.mobileapplications.expensemanager.service.CategoryService;
@@ -44,6 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDto editCategory(EditCategoryDto dto) {
+		checkCategoryName(dto.getNewName());
 		Category category = getCategoryByName(dto.getName());
 		category.setName(dto.getNewName());
 		categoryRepository.save(category);
@@ -52,6 +55,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryDto addNewCategory(CategoryDto dto) {
+		checkCategoryName(dto.getName());
 		if(categoryRepository.findByName(dto.getName()).isPresent()){
 			throw new CategoryAlreadyExistsException();
 		}
@@ -64,5 +68,11 @@ public class CategoryServiceImpl implements CategoryService {
 
 	private Category getCategoryByName(String name) {
 		return categoryRepository.findByName(name).orElseThrow(CategoryNotFoundException::new);
+	}
+
+	private void checkCategoryName(String name) {
+		if(StringUtils.isEmptyOrWhitespaceOnly(name)){
+			throw new InvalidCategoryNameException();
+		}
 	}
 }

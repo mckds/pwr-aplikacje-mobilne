@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/budgets")
 class BudgetController {
 
 	private final BudgetService budgetService;
@@ -19,22 +19,22 @@ class BudgetController {
 		this.budgetService = budgetService;
 	}
 
-	@GetMapping("budgets/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<BudgetDto> getBudgets(@PathVariable Long id) {
 		return ResponseEntity.ok(budgetService.findById(id));
 	}
 
-	@PostMapping("/budgets")
+	@PostMapping()
 	public ResponseEntity<BudgetDto> createNewBudget(@RequestBody BudgetDto budget) {
 		return ResponseEntity.ok(budgetService.addNewBudget(budget));
 	}
 
-	@GetMapping("/budgets")
+	@GetMapping()
 	public ResponseEntity<List<BudgetDto>> getAll() {
 		return ResponseEntity.ok(budgetService.findAll());
 	}
 
-	@PutMapping("/budgets")
+	@PutMapping()
 	public ResponseEntity<BudgetDto> addAccountToBudget(@RequestBody BudgetDto budget) {
 		return ResponseEntity.ok(budgetService.addNewBudget(budget));
 	}
