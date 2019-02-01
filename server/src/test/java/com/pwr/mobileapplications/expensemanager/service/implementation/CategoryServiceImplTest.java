@@ -2,8 +2,10 @@ package com.pwr.mobileapplications.expensemanager.service.implementation;
 
 import com.pwr.mobileapplications.expensemanager.dto.CategoryDto;
 import com.pwr.mobileapplications.expensemanager.dto.EditCategoryDto;
+import com.pwr.mobileapplications.expensemanager.dto.NewCategoryDto;
 import com.pwr.mobileapplications.expensemanager.exception.CategoryAlreadyExistsException;
 import com.pwr.mobileapplications.expensemanager.exception.CategoryNotFoundException;
+import com.pwr.mobileapplications.expensemanager.repository.BudgetRepository;
 import com.pwr.mobileapplications.expensemanager.repository.CategoryRepository;
 import com.pwr.mobileapplications.expensemanager.service.CategoryService;
 import org.junit.Assert;
@@ -24,15 +26,17 @@ public class CategoryServiceImplTest {
 
 	@Mock
 	private CategoryRepository categoryRepository;
+	@Mock
+	private BudgetRepository budgetRepository;
 
 	private CategoryService categoryService;
 
 	@Before
 	public void setup(){
-		categoryService = new CategoryServiceImpl(categoryRepository);
+		categoryService = new CategoryServiceImpl(categoryRepository, budgetRepository);
 		when(categoryRepository.findById(1L)).thenReturn(Optional.empty());
-		when(categoryRepository.findByName("food")).thenReturn(getOptionalCategory());
-		when(categoryRepository.findByName("drinks")).thenReturn(Optional.empty());
+		when(categoryRepository.findByNameAndBudget_BudgetId("food", 1L)).thenReturn(getOptionalCategory());
+		when(categoryRepository.findByNameAndBudget_BudgetId("drinks", 1L)).thenReturn(Optional.empty());
 	}
 
 	@Test(expected = CategoryNotFoundException.class)
@@ -42,12 +46,12 @@ public class CategoryServiceImplTest {
 
 	@Test(expected = CategoryNotFoundException.class)
 	public void ifDeletedObjectDoesNotExistThrowCategoryNotFoundException(){
-		categoryService.deleteByName("drinks");
+		categoryService.deleteByNameAndBudgetId("drinks", 1L);
 	}
 
 	@Test
 	public void deleteMethodShouldReturnDeletedCategory(){
-		CategoryDto dto = categoryService.deleteByName("food");
+		CategoryDto dto = categoryService.deleteByNameAndBudgetId("food", 1L);
 		Assert.assertThat(dto.getName(), equalTo("Food"));
 	}
 
@@ -56,6 +60,7 @@ public class CategoryServiceImplTest {
 		EditCategoryDto editCategoryDto = new EditCategoryDto();
 		editCategoryDto.setName("food");
 		editCategoryDto.setNewName("restaurant");
+		editCategoryDto.setBudgetId(1L);
 
 		CategoryDto dto = categoryService.editCategory(editCategoryDto);
 
@@ -64,8 +69,9 @@ public class CategoryServiceImplTest {
 
 	@Test(expected = CategoryAlreadyExistsException.class)
 	public void ifCategoryExistAddNewCategoryShouldThrowException() {
-		CategoryDto dto = new CategoryDto();
+		NewCategoryDto dto = new NewCategoryDto();
 		dto.setName("food");
+		dto.setBudgetId(1L);
 		categoryService.addNewCategory(dto);
 	}
 

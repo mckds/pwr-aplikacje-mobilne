@@ -12,6 +12,7 @@ public class CategoryDto {
 
 	private String name;
 
+
 	public static CategoryDto from(Category category) {
 		return modelMapper.map(category, CategoryDto.class);
 	}

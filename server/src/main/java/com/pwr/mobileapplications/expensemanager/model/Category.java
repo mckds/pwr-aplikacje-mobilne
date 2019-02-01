@@ -11,12 +11,14 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"name", "budget_id"})})
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private int categoryId;
 
-    @Column(unique = true, length = 50, nullable = false)
+    @Column(length = 50, nullable = false)
     private String name;
 
     @ManyToOne
