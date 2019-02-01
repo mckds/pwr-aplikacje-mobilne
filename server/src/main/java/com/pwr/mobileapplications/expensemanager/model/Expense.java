@@ -13,8 +13,7 @@ import java.time.LocalDate;
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int expenseId;
-
+    private Long expenseId;
     private double amount;
     private LocalDate date;
 
