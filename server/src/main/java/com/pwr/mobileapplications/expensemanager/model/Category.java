@@ -16,6 +16,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int categoryId;
 
+    @Column(unique = true, length = 50)
     private String name;
 
     @ManyToOne

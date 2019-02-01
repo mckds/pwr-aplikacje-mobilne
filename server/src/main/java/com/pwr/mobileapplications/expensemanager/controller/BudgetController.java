@@ -19,9 +19,9 @@ class BudgetController {
 		this.budgetService = budgetService;
 	}
 
-	@GetMapping("budgets/{budgetId}")
-	public ResponseEntity<BudgetDto> getBudgets(@PathVariable Long budgetId) {
-		return ResponseEntity.ok(budgetService.findById(budgetId));
+	@GetMapping("budgets/{id}")
+	public ResponseEntity<BudgetDto> getBudgets(@PathVariable Long id) {
+		return ResponseEntity.ok(budgetService.findById(id));
 	}
 
 	@PostMapping("/budgets")
