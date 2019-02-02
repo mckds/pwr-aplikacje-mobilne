@@ -1,6 +1,7 @@
 package com.pwr.mobileapplications.expensemanager.service.implementation;
 
 import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
+import com.pwr.mobileapplications.expensemanager.exception.BudgetAlreadyExists;
 import com.pwr.mobileapplications.expensemanager.exception.BudgetNotFoundException;
 import com.pwr.mobileapplications.expensemanager.model.Budget;
 import com.pwr.mobileapplications.expensemanager.repository.BudgetRepository;
@@ -29,6 +30,9 @@ public class BudgetServiceImpl implements BudgetService {
 
 	@Override
 	public BudgetDto addNewBudget(BudgetDto budgetDto) {
+		if (budgetRepository.findByName(budgetDto.getName()).isPresent()) {
+			throw new BudgetAlreadyExists();
+		}
 		return BudgetDto.from(budgetRepository.save(budgetDto.toBudget()));
 	}
 
@@ -38,6 +42,14 @@ public class BudgetServiceImpl implements BudgetService {
 		List<BudgetDto> dto = new ArrayList<>();
 		budgets.forEach(b -> dto.add(BudgetDto.from(b)));
 		return dto;
+	}
+
+	@Override
+	public BudgetDto deleteBudgetById(Long id) {
+		Budget budget = budgetRepository.findById(id).
+				orElseThrow(() -> new BudgetNotFoundException("Budget not found"));
+		budgetRepository.delete(budget);
+		return BudgetDto.from(budget);
 	}
 
 }

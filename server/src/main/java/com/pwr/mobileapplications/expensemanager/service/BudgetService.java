@@ -10,4 +10,6 @@ public interface BudgetService {
 	BudgetDto addNewBudget(BudgetDto budgetDto);
 
 	List<BudgetDto> findAll();
+
+	BudgetDto deleteBudgetById(Long id);
 }

@@ -5,6 +5,7 @@ import com.pwr.mobileapplications.expensemanager.dto.EditCategoryDto;
 import com.pwr.mobileapplications.expensemanager.dto.NewCategoryDto;
 import com.pwr.mobileapplications.expensemanager.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,11 +37,11 @@ public class CategoryController {
 	@PostMapping()
 	public ResponseEntity<CategoryDto> addCategory(@PathVariable Long id, @RequestBody NewCategoryDto dto){
 		dto.setBudgetId(id);
-		return ResponseEntity.ok(categoryService.addNewCategory(dto));
+		return new ResponseEntity<>(categoryService.addNewCategory(dto), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping()
 	public ResponseEntity<CategoryDto> deleteCategory(@PathVariable Long id, @RequestBody CategoryDto dto){
-		return ResponseEntity.ok(categoryService.deleteByNameAndBudgetId(dto.getName(), id));
+		return new ResponseEntity<>(categoryService.deleteByNameAndBudgetId(dto.getName(), id), HttpStatus.NO_CONTENT);
 	}
 }

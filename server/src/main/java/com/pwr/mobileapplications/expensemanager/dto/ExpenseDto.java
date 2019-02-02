@@ -17,11 +17,13 @@ public class ExpenseDto {
 	private LocalDate date;
 	private CategoryDto category;
 	private AccountDto account;
+	private BudgetDto budget;
 
 	public static ExpenseDto from(Expense expense) {
 		ExpenseDto dto = modelMapper.map(expense, ExpenseDto.class);
 		dto.setCategory(CategoryDto.from(expense.getCategory()));
 		dto.setAccount(AccountDto.from(expense.getAccount()));
+		dto.setBudget(BudgetDto.from(expense.getBudget()));
 		return dto;
 	}
 
@@ -29,6 +31,7 @@ public class ExpenseDto {
 		Expense expense = modelMapper.map(this, Expense.class);
 		expense.setAccount(this.account.toAccount());
 		expense.setCategory(this.category.toCategory());
+		expense.setBudget(this.budget.toBudget());
 		return expense;
 	}
 

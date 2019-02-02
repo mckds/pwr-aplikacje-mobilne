@@ -53,6 +53,9 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryDto editCategory(EditCategoryDto dto) {
 		checkCategoryName(dto.getNewName());
+		if(categoryRepository.findByNameAndBudget_BudgetId(dto.getName(), dto.getBudgetId()).isPresent()){
+			throw new CategoryAlreadyExistsException();
+		}
 		Category category = categoryRepository.findByNameAndBudget_BudgetId(dto.getName(), dto.getBudgetId())
 				.orElseThrow(CategoryNotFoundException::new);
 		category.setName(dto.getNewName());

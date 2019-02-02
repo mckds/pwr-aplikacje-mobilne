@@ -15,7 +15,7 @@ import java.util.List;
 public class BudgetDto {
 
 	private static final ModelMapper modelMapper = new ModelMapper();
-	private Long id;
+	private Long budgetId;
 	private String name;
 	private LocalDate startDate;
 	private LocalDate endDate;

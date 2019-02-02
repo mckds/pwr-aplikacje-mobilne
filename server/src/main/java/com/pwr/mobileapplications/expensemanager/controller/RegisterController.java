@@ -3,8 +3,9 @@ package com.pwr.mobileapplications.expensemanager.controller;
 
 import com.pwr.mobileapplications.expensemanager.dto.AccountDto;
 import com.pwr.mobileapplications.expensemanager.dto.AccountRegisterDto;
-import com.pwr.mobileapplications.expensemanager.service.AccountService;
+import com.pwr.mobileapplications.expensemanager.service.AccountRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,16 +17,16 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api/register")
 public class RegisterController {
-    private final AccountService accountService;
+    private final AccountRegistrationService accountRegistrationService;
 
     @Autowired
-    public RegisterController(AccountService accountService) {
-        this.accountService = accountService;
+    public RegisterController(AccountRegistrationService accountRegistrationService) {
+        this.accountRegistrationService = accountRegistrationService;
     }
 
     @PostMapping
     public ResponseEntity<AccountDto> register(@RequestBody @Valid AccountRegisterDto registerDto) {
-        return ResponseEntity.ok((accountService.save(registerDto)));
+        return new ResponseEntity<>(accountRegistrationService.register(registerDto), HttpStatus.CREATED);
     }
 
 }

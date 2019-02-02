@@ -3,6 +3,7 @@ package com.pwr.mobileapplications.expensemanager.controller;
 import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
 import com.pwr.mobileapplications.expensemanager.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,12 @@ class BudgetController {
 
 	@PostMapping()
 	public ResponseEntity<BudgetDto> createNewBudget(@RequestBody BudgetDto budget) {
-		return ResponseEntity.ok(budgetService.addNewBudget(budget));
+		return new ResponseEntity<>(budgetService.addNewBudget(budget), HttpStatus.CREATED);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<BudgetDto> deleteBudget(@PathVariable Long id){
+		return new ResponseEntity<>(budgetService.deleteBudgetById(id), HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping()

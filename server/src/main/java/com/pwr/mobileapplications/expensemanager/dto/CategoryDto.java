@@ -10,7 +10,7 @@ import org.modelmapper.ModelMapper;
 public class CategoryDto {
 	private static final ModelMapper modelMapper = new ModelMapper();
 
-	private Long id;
+	private Long categoryId;
 	private String name;
 
 

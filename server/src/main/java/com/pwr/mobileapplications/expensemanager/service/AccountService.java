@@ -1,13 +1,13 @@
 package com.pwr.mobileapplications.expensemanager.service;
 
 import com.pwr.mobileapplications.expensemanager.dto.AccountDto;
-import com.pwr.mobileapplications.expensemanager.dto.AccountRegisterDto;
 
 import java.util.List;
 
 public interface AccountService {
-    AccountDto findByUsername(String username);
+
+    AccountDto findById(Long id);
     List<AccountDto> findAll();
-    AccountDto save(AccountRegisterDto dto);
-    AccountDto deleteByName(String name);
+    AccountDto findByName(String dto);
+
 }
