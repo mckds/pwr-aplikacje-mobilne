@@ -20,13 +20,11 @@ import java.util.List;
 public class ExpenseServiceImpl implements ExpenseService {
     private final ExpenseRepository expenseRepository;
     private final BudgetRepository budgetRepository;
-    private final CategoryRepository categoryRepository;
 
     @Autowired
     public ExpenseServiceImpl(ExpenseRepository expenseRepository, BudgetRepository budgetRepository, CategoryRepository categoryRepository) {
         this.expenseRepository = expenseRepository;
         this.budgetRepository = budgetRepository;
-        this.categoryRepository = categoryRepository;
     }
 
     @Override
