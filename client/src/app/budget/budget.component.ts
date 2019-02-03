@@ -1,5 +1,5 @@
-import { BudgetService } from './../service/bugdet/budget.service';
-import { Budget } from './../service/bugdet/budget';
+import { BudgetService } from '../service/bugdet/budget.service';
+import { Budget } from '../service/bugdet/budget';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

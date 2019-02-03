@@ -1,0 +1,14 @@
+li {
+  list-style-type: none;
+  margin: 5px;
+  background: red;
+  display: inline-block;
+}
+
+li .item {
+  display: inline-block;
+  background: darkred;
+  margin-right: 5px;
+  padding: 0 10px;
+  min-width: 100px;
+}

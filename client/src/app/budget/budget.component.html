@@ -1,8 +1,10 @@
-<p>
-  budget works!
-</p>
 <ul class="budgets">
   <li *ngFor="let budget of budgets">
-    <p>{{budget.id}}, {{budget.name}} ,{{budget.startDate}}, {{budget.endDate}}, {{budget.expenditureLimit}}</p>
+    <a routerLink="/budget/{{budget.budgetId}}">
+    <span class="item name">{{budget.name}}</span>
+    <span class="item startDate">{{budget.startDate}}</span>
+    <span class="item endDate">{{budget.endDate}}</span>
+    <span class="item eLimit">{{budget.expenditureLimit}}</span>
+    </a>
   </li>
 </ul>

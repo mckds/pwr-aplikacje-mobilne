@@ -7,10 +7,12 @@ import { BudgetComponent } from './budget/budget.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { UsersComponent } from './users/users.component';
+import {BudgetdetailsComponent} from './budgetdetails/budgetdetails.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'budget', component: BudgetComponent, canActivate: [AuthGuard] },
+  { path: 'budget/:id', component: BudgetdetailsComponent, canActivate: [AuthGuard] },
   { path: 'categories', component: CategoriesComponent, canActivate: [AuthGuard] },
   { path: 'expenses', component: ExpensesComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },

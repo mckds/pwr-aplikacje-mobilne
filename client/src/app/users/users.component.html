@@ -1,3 +1,5 @@
-<p>
-  users works!
-</p>
+<ul class="accounts">
+  <li *ngFor="let account of accounts">
+    <span>{{account.accountId}}, {{account.username}}</span>
+  </li>
+</ul>

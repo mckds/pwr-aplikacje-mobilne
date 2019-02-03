@@ -6,7 +6,6 @@ import com.pwr.mobileapplications.expensemanager.exception.ExpenseNotFoundExcept
 import com.pwr.mobileapplications.expensemanager.exception.InvalidValueException;
 import com.pwr.mobileapplications.expensemanager.model.Expense;
 import com.pwr.mobileapplications.expensemanager.repository.BudgetRepository;
-import com.pwr.mobileapplications.expensemanager.repository.CategoryRepository;
 import com.pwr.mobileapplications.expensemanager.repository.ExpenseRepository;
 import com.pwr.mobileapplications.expensemanager.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     private final BudgetRepository budgetRepository;
 
     @Autowired
-    public ExpenseServiceImpl(ExpenseRepository expenseRepository, BudgetRepository budgetRepository, CategoryRepository categoryRepository) {
+    public ExpenseServiceImpl(ExpenseRepository expenseRepository, BudgetRepository budgetRepository) {
         this.expenseRepository = expenseRepository;
         this.budgetRepository = budgetRepository;
     }

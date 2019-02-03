@@ -1,0 +1,18 @@
+li {
+  list-style-type: none;
+  padding: 2px;
+  vertical-align: center;
+  height: 25px;
+  background: darkred;
+  margin: 2px;
+}
+li span {
+  padding-top: 3px;
+  display: flex;
+  margin: auto;
+  background: red;
+}
+
+li span:hover{
+  background: aqua;
+}

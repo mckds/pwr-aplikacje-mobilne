@@ -14,6 +14,9 @@ import { BudgetComponent } from './budget/budget.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { UsersComponent } from './users/users.component';
+import { BudgetdetailsComponent } from './budgetdetails/budgetdetails.component';
+import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { BudgetsComponent } from './service/budgets/budgets.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,14 +26,18 @@ import { UsersComponent } from './users/users.component';
     BudgetComponent,
     CategoriesComponent,
     ExpensesComponent,
-    UsersComponent
+    UsersComponent,
+    BudgetdetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
