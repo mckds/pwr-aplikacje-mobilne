@@ -3,5 +3,5 @@ export class Budget {
     name: String;
     startDate: Date;
     endDate: Date;
-    expenditureLimit: Number;
+    expenditureLimit: number;
 }

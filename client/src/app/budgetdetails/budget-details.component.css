@@ -1,13 +1,15 @@
-
-.budgets {
+.title{
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+  background: whitesmoke;
+}
+.expenses {
   background: silver;
   width: 100%;
   margin: 0;
   display: block;
   padding-inline-start: 0;
-}
-.header {
-  background: silver;
 }
 a {
   color: black;
@@ -38,10 +40,30 @@ li:last-child {
   padding: 10px 0px;
   min-width: 100px;
   text-align: center;
+  width: 25%;
 }
-.large {
-  width: 40%;
+.title{
+  width: 100%;
+  display: flex;
+  box-sizing: content-box;
 }
-.small {
-  width: 20%;
+.title h1 {
+  margin: 10px 10px 10px 25px;
+}
+.info{
+  width: 100%;
+  display: flex;
+}
+.info p{
+  font-weight: 500;
+  margin: 25px 10px 10px;
+}
+.title button {
+  width: 10%;
+  padding: 5px;
+  margin: 5px;
+  background: #3f51b5;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
 }

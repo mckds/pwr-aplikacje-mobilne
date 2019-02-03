@@ -1,0 +1,28 @@
+<div class="details" *ngIf="budget">
+  <div class="title">
+    <button (click) = "goBack()">Back</button>
+    <div class="info">
+      <h1 class="name">{{budget.name | uppercase }}</h1>
+      <p class="limit">Limit: {{budget.expenditureLimit}}</p>
+      <p class="limit">Balance: {{balance}}</p>
+    </div>
+
+  </div>
+<div>
+  <span class="header item">Amount</span>
+  <span class="header item">Account Name</span>
+  <span class="header item">Date</span>
+  <span class="header item">Expense Category</span>
+  <ul class="expenses">
+    <li *ngFor="let expense of expenses">
+      <a routerLink="/budget/{{expense.category}}">
+        <span class="item">{{expense.amount}}</span>
+        <span class="item">{{expense.account}}</span>
+        <span class="item">{{expense.date}}</span>
+        <span class="item">{{expense.category.name}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+</div>

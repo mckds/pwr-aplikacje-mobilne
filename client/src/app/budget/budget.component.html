@@ -1,10 +1,14 @@
+<span class="header item large">Name</span>
+<span class="header item small">Start Date</span>
+<span class="header item small">End date</span>
+<span class="header item small">Limit</span>
 <ul class="budgets">
   <li *ngFor="let budget of budgets">
     <a routerLink="/budget/{{budget.budgetId}}">
-    <span class="item name">{{budget.name}}</span>
-    <span class="item startDate">{{budget.startDate}}</span>
-    <span class="item endDate">{{budget.endDate}}</span>
-    <span class="item eLimit">{{budget.expenditureLimit}}</span>
+      <span class="item large">{{budget.name}}</span>
+      <span class="item small">{{budget.startDate}}</span>
+      <span class="item small">{{budget.endDate}}</span>
+      <span class="item small">{{budget.expenditureLimit}}</span>
     </a>
   </li>
 </ul>

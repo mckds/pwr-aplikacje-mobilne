@@ -14,9 +14,8 @@ import { BudgetComponent } from './budget/budget.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { UsersComponent } from './users/users.component';
-import { BudgetdetailsComponent } from './budgetdetails/budgetdetails.component';
+import { BudgetDetailsComponent } from './budgetdetails/budget-details.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import { BudgetsComponent } from './service/budgets/budgets.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +26,7 @@ import { BudgetsComponent } from './service/budgets/budgets.component';
     CategoriesComponent,
     ExpensesComponent,
     UsersComponent,
-    BudgetdetailsComponent
+    BudgetDetailsComponent
   ],
   imports: [
     BrowserModule,
