@@ -9,29 +9,23 @@ import {
   MatInputModule,
   MatButtonToggleModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
 } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   imports: [
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatInputModule,
     MatButtonToggleModule,
-    MatInputModule,
   ],
   exports: [
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    MatInputModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
@@ -39,7 +33,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatCardModule,
     MatInputModule,
     MatButtonToggleModule,
-    MatInputModule,
   ],
   declarations: []
 })
