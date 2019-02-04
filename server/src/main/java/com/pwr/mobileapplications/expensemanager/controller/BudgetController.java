@@ -1,10 +1,11 @@
 package com.pwr.mobileapplications.expensemanager.controller;
 
 import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
-import com.pwr.mobileapplications.expensemanager.service.BudgetService;
+import com.pwr.mobileapplications.expensemanager.service.BudgetAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,31 +14,24 @@ import java.util.List;
 @RequestMapping("/api/budgets")
 class BudgetController {
 
-	private final BudgetService budgetService;
+	private final BudgetAccountService budgetService;
 
 	@Autowired
-	public BudgetController(BudgetService budgetService) {
+	public BudgetController(BudgetAccountService budgetService) {
 		this.budgetService = budgetService;
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<BudgetDto> getBudgets(@PathVariable Long id) {
-		return ResponseEntity.ok(budgetService.findById(id));
+
+	@GetMapping()
+	public ResponseEntity<List<BudgetDto>> getAvailableBudgets() {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		return ResponseEntity.ok(budgetService.findAllByUserName(userName));
 	}
 
 	@PostMapping()
-	public ResponseEntity<BudgetDto> createNewBudget(@RequestBody BudgetDto budget) {
-		return new ResponseEntity<>(budgetService.addNewBudget(budget), HttpStatus.CREATED);
+	public ResponseEntity createBudget(@RequestBody BudgetDto dto) {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		budgetService.createNewBudget(userName, dto);
+		return new ResponseEntity(HttpStatus.CREATED);
 	}
-
-	@DeleteMapping("/{id}")
-	public ResponseEntity<BudgetDto> deleteBudget(@PathVariable Long id){
-		return new ResponseEntity<>(budgetService.deleteBudgetById(id), HttpStatus.NO_CONTENT);
-	}
-
-	@GetMapping()
-	public ResponseEntity<List<BudgetDto>> getAll() {
-		return ResponseEntity.ok(budgetService.findAll());
-	}
-
 }

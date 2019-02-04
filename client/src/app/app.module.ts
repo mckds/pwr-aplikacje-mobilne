@@ -14,8 +14,6 @@ import { CategoriesComponent } from './categories/categories.component';
 import { ExpensesComponent } from './expenses/expenses.component';
 import { BudgetDetailsComponent } from './budgetdetails/budget-details.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
-import { CalendarComponent } from './calendar/calendar.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +24,6 @@ import { CalendarComponent } from './calendar/calendar.component';
     CategoriesComponent,
     ExpensesComponent,
     BudgetDetailsComponent,
-    CalendarComponent,
   ],
   imports: [
     BrowserModule,

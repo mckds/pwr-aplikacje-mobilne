@@ -13,6 +13,6 @@ public class NewExpenseDto {
 	private Long accountId;
 	private Long budgetId;
 	private Double amount;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "mm-dd-yyyy")
 	private LocalDate date;
 }

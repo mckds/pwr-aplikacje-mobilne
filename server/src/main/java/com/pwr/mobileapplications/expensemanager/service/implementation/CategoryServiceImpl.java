@@ -8,6 +8,7 @@ import com.pwr.mobileapplications.expensemanager.exception.BudgetNotFoundExcepti
 import com.pwr.mobileapplications.expensemanager.exception.CategoryAlreadyExistsException;
 import com.pwr.mobileapplications.expensemanager.exception.CategoryNotFoundException;
 import com.pwr.mobileapplications.expensemanager.exception.InvalidCategoryNameException;
+import com.pwr.mobileapplications.expensemanager.model.Budget;
 import com.pwr.mobileapplications.expensemanager.model.Category;
 import com.pwr.mobileapplications.expensemanager.repository.BudgetRepository;
 import com.pwr.mobileapplications.expensemanager.repository.CategoryRepository;
@@ -66,11 +67,15 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryDto addNewCategory(NewCategoryDto dto) {
 		checkCategoryName(dto.getName());
-		if(categoryRepository.findByNameAndBudget_BudgetId(dto.getName(), dto.getBudgetId()).isPresent()){
-			throw new CategoryAlreadyExistsException();
+		Budget budget = budgetRepository.findById(dto.getBudgetId()).orElseThrow(BudgetNotFoundException::new);
+		List<Category> categories = budget.getCategories();
+		for(Category c : categories){
+			if(c.getName().equals(dto.getName())) {
+				throw new CategoryAlreadyExistsException();
+			}
 		}
 		Category category = new Category();
-		category.setBudget(budgetRepository.findById(dto.getBudgetId()).orElseThrow(BudgetNotFoundException::new));
+		category.setBudget(budget);
 		category.setName(dto.getName());
 		return CategoryDto.from(categoryRepository.save(category));
 	}

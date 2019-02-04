@@ -1,7 +1,10 @@
+import {Category} from '../category/category';
+
 export class Budget {
-    budgetId: Number;
+    budgetId: number;
     name: String;
     startDate: Date;
     endDate: Date;
     expenditureLimit: number;
+    categories: Category[];
 }

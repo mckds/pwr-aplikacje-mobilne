@@ -8,5 +8,4 @@ import lombok.RequiredArgsConstructor;
 public class NewCategoryDto {
 	private Long budgetId;
 	private String name;
-
 }

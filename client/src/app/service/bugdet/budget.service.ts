@@ -19,8 +19,12 @@ export class BudgetService {
   }
 
   getBudgets(): Observable<Budget[]> {
-    const url = `${this.url}`;
-    return this.http.get<Budget[]>(url);
+    return this.http.get<Budget[]>(this.url);
   }
+
+  createBudget(name: string, startDate: Date, endDate: Date, expenditureLimit: string) {
+    return this.http.post<any>(this.url, {name, startDate, endDate, expenditureLimit}, {observe: 'response'});
+  }
+
 }
 

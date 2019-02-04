@@ -22,14 +22,21 @@ public class Budget {
     private LocalDate endDate;
     private Double expenditureLimit;
 
-    @OneToMany(mappedBy = "budget")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "budget_account",
+            joinColumns = @JoinColumn(name = "budgetId"),
+            inverseJoinColumns = @JoinColumn(name = "accountId")
+    )
     private List<Account> accounts = new ArrayList<>();
 
     @OneToMany(mappedBy = "budget")
     private List<Expense> expenses = new ArrayList<>();
 
     // coś trzeba by zrobić z tym eager
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "budget")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "budget")
     private List<Category> categories = new ArrayList<>();
 
     public Budget() {

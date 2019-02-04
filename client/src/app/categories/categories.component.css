@@ -1,0 +1,41 @@
+.container{
+  display: inline-block;
+  width: 50%;
+  box-sizing: border-box;
+  margin-top: 25px;
+}
+.left{
+  text-align: end;
+  padding-right: 30px;
+}
+.right{
+  text-align: start;
+  vertical-align: top;
+  padding-left: 30px;
+}
+.new-cat-form{
+  display: inline-block;
+  text-align: center;
+}
+.container h4{
+  margin: 10px 0px;
+}
+.new-cat-form button{
+  margin-left: 10px;
+}
+
+.categories{
+  display: contents;
+  list-style-type: none;
+}
+
+.categories li {
+  display: table-caption;
+  line-height: 25px;
+  font-weight: 500;
+  padding: 0 25px;
+  border-bottom: 1px solid silver;
+}
+.categories li:last-child{
+  border-bottom: 0;
+}

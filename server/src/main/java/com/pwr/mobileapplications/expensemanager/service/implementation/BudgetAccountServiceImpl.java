@@ -1,8 +1,10 @@
 package com.pwr.mobileapplications.expensemanager.service.implementation;
 
 import com.pwr.mobileapplications.expensemanager.dto.AccountDto;
+import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
 import com.pwr.mobileapplications.expensemanager.exception.AccountAlreadyExists;
 import com.pwr.mobileapplications.expensemanager.exception.AccountNotFoundException;
+import com.pwr.mobileapplications.expensemanager.exception.BudgetAlreadyExists;
 import com.pwr.mobileapplications.expensemanager.exception.BudgetNotFoundException;
 import com.pwr.mobileapplications.expensemanager.model.Account;
 import com.pwr.mobileapplications.expensemanager.model.Budget;
@@ -52,6 +54,25 @@ public class BudgetAccountServiceImpl implements BudgetAccountService {
 	public void deleteAccountFromBudget(Long accountId, Long budgetId) {
 		Budget budget = budgetRepository.findById(budgetId).orElseThrow(BudgetNotFoundException::new);
 		budget.getAccounts().removeIf(account -> account.getAccountId().equals(accountId));
+		budgetRepository.save(budget);
+	}
+
+	@Override
+	public List<BudgetDto> findAllByUserName(String userName) {
+		Account account = accountRepository.findByUsername(userName).orElseThrow(AccountNotFoundException::new);
+		List<BudgetDto> budgets = new ArrayList<>();
+		account.getBudgets().forEach(b -> budgets.add(BudgetDto.from(b)));
+		return budgets;
+	}
+
+	@Override
+	public void createNewBudget(String userName, BudgetDto dto) {
+		Account account = accountRepository.findByUsername(userName).orElseThrow(AccountNotFoundException::new);
+		if(budgetRepository.findByName(dto.getName()).isPresent()){
+			throw new BudgetAlreadyExists();
+		}
+		Budget budget = dto.toBudget();
+		budget.getAccounts().add(account);
 		budgetRepository.save(budget);
 	}
 }

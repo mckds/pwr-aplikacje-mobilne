@@ -1,9 +1,26 @@
 <h2 class="title">YOUR BUDGETS</h2>
-<form>
-<app-calendar placeholder="start date"></app-calendar>
-<app-calendar placeholder="end date"></app-calendar>
-</form>
 
+<div class="new-budget-form">
+  <mat-card>
+  <mat-form-field>
+    <input matInput placeholder="Budget Name" #budgetName required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="startDate" placeholder="Choose start date" #sDate required>
+    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+    <mat-datepicker #startDate></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="endDate" placeholder="Choose end date" #eDate required>
+    <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+    <mat-datepicker #endDate></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Limit" #limit required>
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="createBudget(budgetName.value, sDate.value, eDate.value, limit.value)">Create</button>
+  </mat-card>
+</div>
 <div>
 <span class="header item large">Name</span>
 <span class="header item small">Start Date</span>
@@ -11,7 +28,7 @@
 <span class="header item small">Limit</span>
 <ul class="budgets">
   <li *ngFor="let budget of budgets">
-    <a routerLink="/budget/{{budget.budgetId}}">
+    <a routerLink="/budgets/{{budget.budgetId}}">
       <span class="item large">{{budget.name}}</span>
       <span class="item small">{{budget.startDate}}</span>
       <span class="item small">{{budget.endDate}}</span>

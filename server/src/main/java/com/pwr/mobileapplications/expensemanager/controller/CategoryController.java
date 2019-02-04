@@ -1,7 +1,6 @@
 package com.pwr.mobileapplications.expensemanager.controller;
 
 import com.pwr.mobileapplications.expensemanager.dto.CategoryDto;
-import com.pwr.mobileapplications.expensemanager.dto.EditCategoryDto;
 import com.pwr.mobileapplications.expensemanager.dto.NewCategoryDto;
 import com.pwr.mobileapplications.expensemanager.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
-
 @RestController
-@RequestMapping("/api/budgets/{id}/categories")
+@RequestMapping("/api/categories")
 public class CategoryController {
 
 	private final CategoryService categoryService;
@@ -23,20 +19,8 @@ public class CategoryController {
 		this.categoryService = categoryService;
 	}
 
-	@GetMapping()
-	public ResponseEntity<List<CategoryDto>> getAll(@PathVariable Long id){
-		return ResponseEntity.ok(categoryService.findAll(id));
-	}
-
-	@PutMapping()
-	public ResponseEntity<CategoryDto> editCategoryName(@PathVariable Long id, @RequestBody @Valid EditCategoryDto dto){
-		dto.setBudgetId(id);
-		return ResponseEntity.ok(categoryService.editCategory(dto));
-	}
-
 	@PostMapping()
-	public ResponseEntity<CategoryDto> addCategory(@PathVariable Long id, @RequestBody NewCategoryDto dto){
-		dto.setBudgetId(id);
+	public ResponseEntity<CategoryDto> addCategory(@RequestBody NewCategoryDto dto){
 		return new ResponseEntity<>(categoryService.addNewCategory(dto), HttpStatus.CREATED);
 	}
 

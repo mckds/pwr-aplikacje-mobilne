@@ -37,4 +37,5 @@ public class BudgetAccountController {
 	public ResponseEntity<List<AccountDto>> getAccounts(@PathVariable Long budgetId){
 		return ResponseEntity.ok(budgetAccountService.getAllByBudgetId(budgetId));
 	}
+
 }

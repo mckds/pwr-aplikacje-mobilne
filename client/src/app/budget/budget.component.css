@@ -45,3 +45,21 @@ li:last-child {
 .small {
   width: 20%;
 }
+
+.new-budget-form{
+  display: inline-block;
+  width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+  text-align: center;
+  background: whitesmoke;
+}
+.new-budget-form .mat-form-field{
+  margin: 0 5px;
+}
+.new-budget-form button {
+  margin-left: 5px;
+  margin-bottom: 1.25em;
+  height: 35px;
+  padding-bottom: 1.25em;
+}

@@ -20,7 +20,7 @@ public class BudgetDto {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Double expenditureLimit;
-	private List<CategoryDto> categories;
+	private List<CategoryDto> categories = new ArrayList<>();
 
 	public static BudgetDto from(Budget budget) {
 		BudgetDto dto = modelMapper.map(budget, BudgetDto.class);

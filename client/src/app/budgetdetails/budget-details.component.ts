@@ -5,7 +5,6 @@ import {BudgetService} from '../service/bugdet/budget.service';
 import { Location } from '@angular/common';
 import {Expense} from '../service/expense/expense';
 import {ExpenseService} from '../service/expense/expense.service';
-
 @Component({
   selector: 'app-budgetdetails',
   templateUrl: './budget-details.component.html',

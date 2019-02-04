@@ -22,9 +22,8 @@ public class Account {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "budget_id")
-    private Budget budget;
+    @ManyToMany(mappedBy = "accounts")
+    private List<Budget> budgets;
 
     @OneToMany(mappedBy = "account")
     private List<Expense> expenses = new ArrayList<>();
