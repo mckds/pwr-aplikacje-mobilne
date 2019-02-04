@@ -13,9 +13,10 @@ import { HomeComponent } from './home/home.component';
 import { BudgetComponent } from './budget/budget.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ExpensesComponent } from './expenses/expenses.component';
-import { UsersComponent } from './users/users.component';
 import { BudgetDetailsComponent } from './budgetdetails/budget-details.component';
 import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { CalendarComponent } from './calendar/calendar.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,8 +26,8 @@ import { MatTableModule, MatPaginatorModule, MatSortModule } from '@angular/mate
     BudgetComponent,
     CategoriesComponent,
     ExpensesComponent,
-    UsersComponent,
-    BudgetDetailsComponent
+    BudgetDetailsComponent,
+    CalendarComponent,
   ],
   imports: [
     BrowserModule,
