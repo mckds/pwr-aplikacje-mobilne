@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long accountId;
 
     @Column(unique = true, nullable = false, length = 50)

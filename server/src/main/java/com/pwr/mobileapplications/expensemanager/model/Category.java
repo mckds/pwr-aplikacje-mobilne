@@ -14,7 +14,7 @@ import java.util.List;
 @Table(uniqueConstraints={@UniqueConstraint(columnNames = {"name", "budget_id"})})
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
 
     @Column(length = 50, nullable = false)

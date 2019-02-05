@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 public class Budget {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long budgetId;
 
     @Column(length = 50, unique = true, nullable = false)
