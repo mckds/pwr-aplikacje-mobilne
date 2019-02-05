@@ -9,5 +9,4 @@ public interface ExpenseService {
 
 	List<ExpenseDto> findAll(Long budgetId);
 	ExpenseDto addNewExpense(NewExpenseDto dto, String userName);
-	ExpenseDto delete(Long expenseId);
 }

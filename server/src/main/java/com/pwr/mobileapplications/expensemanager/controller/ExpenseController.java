@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenses")
-public class ExpenseController {
+class ExpenseController {
 
 	private final ExpenseService expenseService;
 
@@ -33,11 +33,6 @@ public class ExpenseController {
 	public ResponseEntity<List<ExpenseDto>> getExpenses(@PathVariable Long budgetId){
 		return ResponseEntity.ok(expenseService.findAll(budgetId));
 
-	}
-
-	@DeleteMapping("accounts/{expenseId}")
-	public ResponseEntity<ExpenseDto> deleteExpense(@PathVariable Long expenseId){
-		return new ResponseEntity<>(expenseService.delete(expenseId), HttpStatus.NO_CONTENT);
 	}
 
 }

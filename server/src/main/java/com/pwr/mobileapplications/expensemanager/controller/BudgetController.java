@@ -1,7 +1,7 @@
 package com.pwr.mobileapplications.expensemanager.controller;
 
 import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
-import com.pwr.mobileapplications.expensemanager.service.BudgetAccountService;
+import com.pwr.mobileapplications.expensemanager.service.BudgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +15,10 @@ import java.util.List;
 @RequestMapping("/api/budgets")
 class BudgetController {
 
-	private final BudgetAccountService budgetService;
+	private final BudgetService budgetService;
 
 	@Autowired
-	public BudgetController(BudgetAccountService budgetService) {
+	public BudgetController(BudgetService budgetService) {
 		this.budgetService = budgetService;
 	}
 

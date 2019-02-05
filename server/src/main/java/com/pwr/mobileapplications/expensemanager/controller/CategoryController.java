@@ -6,7 +6,10 @@ import com.pwr.mobileapplications.expensemanager.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
@@ -25,9 +28,5 @@ public class CategoryController {
 	public ResponseEntity<CategoryDto> addCategory(@RequestBody @Valid NewCategoryDto dto){
 		return new ResponseEntity<>(categoryService.addNewCategory(dto), HttpStatus.CREATED);
 	}
-
-	@DeleteMapping()
-	public ResponseEntity<CategoryDto> deleteCategory(@PathVariable Long id, @RequestBody CategoryDto dto){
-		return new ResponseEntity<>(categoryService.deleteByNameAndBudgetId(dto.getName(), id), HttpStatus.NO_CONTENT);
-	}
+	
 }

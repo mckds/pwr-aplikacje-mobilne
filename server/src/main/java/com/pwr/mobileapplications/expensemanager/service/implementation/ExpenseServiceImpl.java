@@ -57,11 +57,4 @@ public class ExpenseServiceImpl implements ExpenseService {
         expense.setDate(dto.getDate());
         return ExpenseDto.from(expenseRepository.save(expense));
     }
-
-    @Override
-    public ExpenseDto delete(Long expenseId) {
-        Expense expense = expenseRepository.findById(expenseId).orElseThrow(ExpenseNotFoundException::new);
-        expenseRepository.delete(expense);
-        return ExpenseDto.from(expense);
-    }
 }

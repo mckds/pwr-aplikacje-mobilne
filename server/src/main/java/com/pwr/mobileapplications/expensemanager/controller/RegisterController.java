@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/register")
-public class RegisterController {
+class RegisterController {
     private final AccountRegistrationService accountRegistrationService;
 
     @Autowired
