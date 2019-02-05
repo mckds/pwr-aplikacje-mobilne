@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,10 +29,15 @@ class BudgetController {
 		return ResponseEntity.ok(budgetService.findAllByUserName(userName));
 	}
 
-	@PostMapping()
-	public ResponseEntity createBudget(@RequestBody BudgetDto dto) {
+	@GetMapping("/{id}")
+	public ResponseEntity<BudgetDto> getBudget(@PathVariable Long id){
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		budgetService.createNewBudget(userName, dto);
-		return new ResponseEntity(HttpStatus.CREATED);
+		return ResponseEntity.ok(budgetService.findBudgetById(id, userName));
+	}
+
+	@PostMapping()
+	public ResponseEntity<BudgetDto> createBudget(@RequestBody @Valid BudgetDto dto) {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		return new ResponseEntity<>(budgetService.createNewBudget(userName, dto), HttpStatus.CREATED);
 	}
 }

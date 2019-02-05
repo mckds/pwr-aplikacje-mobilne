@@ -42,7 +42,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public ExpenseDto addNewExpense(NewExpenseDto dto) {
+    public ExpenseDto addNewExpense(NewExpenseDto dto, String userName) {
         if(dto.getAmount()<0){
             throw new InvalidValueException("Expense amount cannot be les than 0");
         }
@@ -51,7 +51,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         }
         Expense expense = new Expense();
         expense.setCategory(categoryRepository.findById(dto.getCategoryId()).orElseThrow(ExpenseNotFoundException::new));
-        expense.setAccount(accountRepository.findById(dto.getAccountId()).orElseThrow(AccountNotFoundException::new));
+        expense.setAccount(accountRepository.findByUsername(userName).orElseThrow(AccountNotFoundException::new));
         expense.setBudget(budgetRepository.findById(dto.getBudgetId()).orElseThrow(BudgetNotFoundException::new));
         expense.setAmount(dto.getAmount());
         expense.setDate(dto.getDate());

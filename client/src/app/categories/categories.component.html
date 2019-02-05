@@ -15,10 +15,10 @@
     </div>
   </div>
 </div>
-    <div *ngIf="chosenBudget" class="container right">
+    <div class="container right">
     <h4>Created categories</h4>
-    <ul class="categories">
-      <li *ngFor="let category of chosenBudget.categories">{{category.name | uppercase}}</li>
+    <ul class="categories" *ngIf="chosenBudget">
+      <li *ngFor="let category of chosenBudget.categories">{{category.name}}</li>
     </ul>
     </div>
 

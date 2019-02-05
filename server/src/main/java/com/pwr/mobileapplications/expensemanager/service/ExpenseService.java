@@ -8,6 +8,6 @@ import java.util.List;
 public interface ExpenseService {
 
 	List<ExpenseDto> findAll(Long budgetId);
-	ExpenseDto addNewExpense(NewExpenseDto dto);
+	ExpenseDto addNewExpense(NewExpenseDto dto, String userName);
 	ExpenseDto delete(Long expenseId);
 }

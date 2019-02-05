@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +17,13 @@ public class BudgetDto {
 
 	private static final ModelMapper modelMapper = new ModelMapper();
 	private Long budgetId;
+	@NotNull
 	private String name;
+	@NotNull
 	private LocalDate startDate;
+	@NotNull
 	private LocalDate endDate;
+	@NotNull
 	private Double expenditureLimit;
 	private List<CategoryDto> categories = new ArrayList<>();
 

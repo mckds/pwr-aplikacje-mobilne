@@ -3,26 +3,29 @@
     <button (click) = "goBack()">Back</button>
     <div class="info">
       <h1 class="name">{{budget.name | uppercase }}</h1>
-      <p class="limit">Limit: {{budget.expenditureLimit}}</p>
-      <p class="limit">Balance: {{balance}}</p>
+      <p class="limit">Limit: {{budget.expenditureLimit | number}}</p>
+      <p class="limit">Balance: {{balance | number}}</p>
     </div>
-
   </div>
-<div>
-  <span class="header item">Amount</span>
-  <span class="header item">Account Name</span>
-  <span class="header item">Date</span>
-  <span class="header item">Expense Category</span>
-  <ul class="expenses">
-    <li *ngFor="let expense of expenses">
-      <a routerLink="/budget/{{expense.category}}">
-        <span class="item">{{expense.amount}}</span>
-        <span class="item">{{expense.account}}</span>
-        <span class="item">{{expense.date}}</span>
-        <span class="item">{{expense.category.name}}</span>
-      </a>
-    </li>
-  </ul>
 </div>
 
+<div class="container">
+  <h4 class="title">Add account to budget:</h4>
+  <mat-form-field>
+    <mat-select placeholder="Add account to budget" [(ngModel)]="chosenAccount">
+      <mat-option *ngFor="let account of unassignedAccounts" style="width: 500px" [value]="account">{{account.username}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-flat-button color="primary" (click)="addAccount()">Add</button>
+</div>
+<div class="container">
+  <h4 class="title">Accounts in budget:</h4>
+  <span class="header-item">Account Name</span>
+  <span class="header-item">Expenses</span>
+  <ul *ngIf="expenses" class="container-list">
+    <li *ngFor="let account of accountsInBudget">
+      <span class="header-item">{{account.username}}</span>
+      <span class="header-item">{{account.expensesValue | number}}</span>
+    </li>
+  </ul>
 </div>

@@ -13,6 +13,7 @@ export class CategoriesComponent implements OnInit {
   budgets: Budget[];
   chosenBudget: Budget;
   catName: string;
+
   constructor(private budgetService: BudgetService, private categoryService: CategoryService) {
   }
 
@@ -21,14 +22,15 @@ export class CategoriesComponent implements OnInit {
   }
 
   getBudgets(): void {
-    this.budgetService.getBudgets().subscribe(b => this.budgets = b);
+    this.budgetService.getBudgets().subscribe(b => {
+      this.budgets = b;
+      if (b.length > 0) {
+        this.chosenBudget = b[0];
+      }
+    });
   }
 
   createNew() {
-    this.categoryService.createBudget(this.catName, this.chosenBudget.budgetId).subscribe(() => {
-      this.ngOnInit();
-      this.chosenBudget = undefined;
-      this.catName = undefined;
-    });
+    this.categoryService.createBudget(this.catName, this.chosenBudget.budgetId).subscribe(b => this.chosenBudget.categories.push(b));
   }
 }

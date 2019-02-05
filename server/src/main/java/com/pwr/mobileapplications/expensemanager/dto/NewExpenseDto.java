@@ -1,18 +1,20 @@
 package com.pwr.mobileapplications.expensemanager.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
 public class NewExpenseDto {
+	@NotNull
 	private Long categoryId;
-	private Long accountId;
+	@NotNull
 	private Long budgetId;
+	@NotNull
 	private Double amount;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "mm-dd-yyyy")
+	@NotNull
 	private LocalDate date;
 }

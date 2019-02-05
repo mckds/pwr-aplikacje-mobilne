@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Category} from './category';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,8 @@ export class CategoryService {
   constructor(private http: HttpClient) {
   }
 
-  createBudget(name: string, budgetId: number) {
-    return this.http.post<any>(this.url, {name, budgetId}, {observe: 'response'});
+  createBudget(name: string, budgetId: number): Observable<Category> {
+    return this.http.post<Category>(this.url, {name, budgetId});
   }
 }
 

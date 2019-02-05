@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
@@ -20,7 +22,7 @@ public class CategoryController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<CategoryDto> addCategory(@RequestBody NewCategoryDto dto){
+	public ResponseEntity<CategoryDto> addCategory(@RequestBody @Valid NewCategoryDto dto){
 		return new ResponseEntity<>(categoryService.addNewCategory(dto), HttpStatus.CREATED);
 	}
 

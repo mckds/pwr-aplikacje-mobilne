@@ -1,8 +1,8 @@
-import { Budget } from './budget';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
+import {Budget} from './budget';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class BudgetService {
 
   url = `${environment.apiUrl}/budgets`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getBudget(id: number): Observable<Budget> {
     const url = `${this.url}/${id}`;
@@ -22,8 +23,8 @@ export class BudgetService {
     return this.http.get<Budget[]>(this.url);
   }
 
-  createBudget(name: string, startDate: Date, endDate: Date, expenditureLimit: string) {
-    return this.http.post<any>(this.url, {name, startDate, endDate, expenditureLimit}, {observe: 'response'});
+  createBudget(name: string, startDate: Date, endDate: Date, expenditureLimit: string): Observable<Budget> {
+    return this.http.post<Budget>(this.url, {name, startDate, endDate, expenditureLimit});
   }
 
 }

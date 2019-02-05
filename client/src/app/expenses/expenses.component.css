@@ -1,0 +1,45 @@
+.expense{
+  text-align: center;
+}
+
+.expense mat-form-field{
+  margin: 0 10px;
+}
+.expense button {
+  margin: 0 10px;
+}
+.expense-list{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header-item{
+  font-weight: 500;
+  padding: 0 10px;
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 150px;
+  height: 35px;
+  line-height: 35px;
+}
+li {
+  font-weight: 500;
+  align-content: center;
+  border-top: 1px solid black;
+  /*border-bottom: 1px solid black;*/
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  display: inline-block;
+}
+li:nth-child(odd) {
+  background: silver;
+}
+li:hover{
+  background: dimgrey;
+}
+li:last-child {
+  border-bottom: 1px solid black;
+}

@@ -1,7 +1,8 @@
 import {Expense} from '../expense/expense';
 
 export class Account {
-  accountId: Number;
+  accountId: number;
   username: String;
   expenses: Expense[];
+  expensesValue: number;
 }

@@ -1,6 +1,6 @@
-import { BudgetService } from '../service/bugdet/budget.service';
-import { Budget } from '../service/bugdet/budget';
-import { Component, OnInit } from '@angular/core';
+import {BudgetService} from '../service/bugdet/budget.service';
+import {Budget} from '../service/bugdet/budget';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-budget',
@@ -10,8 +10,13 @@ import { Component, OnInit } from '@angular/core';
 export class BudgetComponent implements OnInit {
 
   budgets: Budget[];
-  budgetName: String;
-  constructor(private budgetService: BudgetService) { }
+  budgetName: string;
+  expenditureLimit: string;
+  sDate: string;
+  eDate: string;
+
+  constructor(private budgetService: BudgetService) {
+  }
 
   ngOnInit() {
     this.getBudgets();
@@ -19,11 +24,22 @@ export class BudgetComponent implements OnInit {
 
   getBudgets(): void {
     this.budgetService.getBudgets()
-    .subscribe(budgets => this.budgets = budgets);
+      .subscribe(budgets => this.budgets = budgets);
   }
 
-  createBudget(budgetName: string, startDate: string, endDate: string, expenditureLimit: string) {
-    this.budgetService.createBudget(budgetName, new Date(startDate), new Date(endDate), expenditureLimit)
-      .subscribe(() => { this.ngOnInit(); });
+  createBudget() {
+    this.budgetService.createBudget(this.budgetName, new Date(this.sDate), new Date(this.eDate), this.expenditureLimit)
+      .subscribe(b => {
+        this.budgets.push(b);
+        this.clear();
+        alert('Budget added');
+      });
+  }
+
+  private clear() {
+    this.budgetName = '';
+    this.sDate = '';
+    this.eDate = '';
+    this.expenditureLimit = '';
   }
 }

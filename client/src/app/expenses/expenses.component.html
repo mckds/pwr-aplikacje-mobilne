@@ -1,1 +1,48 @@
 <h2 class="title">BUDGET EXPENSES</h2>
+<div class="expense">
+  <h4>Chose budget</h4>
+  <mat-form-field>
+    <mat-select placeholder="Your chosen budget" (selectionChange)="getExpenses()" [(ngModel)]="chosenBudget">
+      <mat-option *ngFor="let budget of budgets" style="width: 500px" [value]="budget">{{budget.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <h4>Create new expense</h4>
+  <div class="form">
+
+
+    <mat-form-field>
+      <mat-select placeholder="Your chosen Category" [(ngModel)]="chosenCategory" required>
+        <div *ngIf="chosenBudget">
+          <mat-option *ngFor="let category of chosenBudget.categories" style="width: 500px" [value]="category">{{category.name}}</mat-option>
+        </div>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="endDate" placeholder="Choose end date" [(ngModel)]="expenseDate" required>
+      <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="number" matInput placeholder="Amount" [(ngModel)]="amount" required>
+    </mat-form-field>
+      <button mat-flat-button color="primary" (click)="createNew()">Create</button>
+  </div>
+
+  <div>
+    <h4 class="title">Expenses in budget:</h4>
+    <span class="header-item">Account Name</span>
+    <span class="header-item">Expense Date</span>
+    <span class="header-item">Category</span>
+    <span class="header-item">Amount</span>
+    <ul *ngIf="expenses" class="expense-list">
+      <li *ngFor="let expense of expenses">
+        <span class="header-item">{{expense.account}}</span>
+        <span class="header-item">{{expense.date | date}}</span>
+        <span class="header-item">{{expense.category.name}}</span>
+        <span class="header-item">{{expense.amount | number}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

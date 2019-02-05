@@ -1,11 +1,10 @@
 package com.pwr.mobileapplications.expensemanager.service.implementation;
 
 import com.pwr.mobileapplications.expensemanager.dto.AccountDto;
+import com.pwr.mobileapplications.expensemanager.dto.AccountExpensesDto;
+import com.pwr.mobileapplications.expensemanager.dto.AccountToBudgetDto;
 import com.pwr.mobileapplications.expensemanager.dto.BudgetDto;
-import com.pwr.mobileapplications.expensemanager.exception.AccountAlreadyExists;
-import com.pwr.mobileapplications.expensemanager.exception.AccountNotFoundException;
-import com.pwr.mobileapplications.expensemanager.exception.BudgetAlreadyExists;
-import com.pwr.mobileapplications.expensemanager.exception.BudgetNotFoundException;
+import com.pwr.mobileapplications.expensemanager.exception.*;
 import com.pwr.mobileapplications.expensemanager.model.Account;
 import com.pwr.mobileapplications.expensemanager.model.Budget;
 import com.pwr.mobileapplications.expensemanager.repository.AccountRepository;
@@ -30,24 +29,46 @@ public class BudgetAccountServiceImpl implements BudgetAccountService {
 	}
 
 	@Override
-	public void addAccountToBudget(AccountDto dto, Long budgetId) {
-		Account account = ((dto.getAccountId() == null)?
-				accountRepository.findByUsername(dto.getUsername()) : accountRepository.findById(dto.getAccountId()))
-						.orElseThrow(() -> new AccountNotFoundException("Account Not found"));
-		Budget budget = budgetRepository.findById(budgetId).orElseThrow(BudgetNotFoundException::new);
-		if(budget.getAccounts().contains(account)){
-			throw new AccountAlreadyExists("Account in budget" + budgetId + " already exists");
+	public AccountDto addAccountToBudget(AccountToBudgetDto dto, String accountName) {
+		Account loggedUser = accountRepository.findByUsername(accountName).orElseThrow(AccountNotFoundException::new);
+		Account account = accountRepository.findById(dto.getAccountId()).orElseThrow(AccountNotFoundException::new);
+		Budget budget = budgetRepository.findById(dto.getBudgetId()).orElseThrow(BudgetNotFoundException::new);
+		if (!budget.getAccounts().contains(loggedUser)) {
+			throw new InvalidValueException("You cannot do that");
+		}
+		if (budget.getAccounts().contains(account)) {
+			throw new AccountAlreadyExists("Account in budget" + accountName + " already exists");
 		}
 		budget.getAccounts().add(account);
 		budgetRepository.save(budget);
+		return AccountDto.from(account);
 	}
 
 	@Override
-	public List<AccountDto> getAllByBudgetId(Long budgetId) {
-		List<AccountDto> accounts = new ArrayList<>();
+	public List<AccountExpensesDto> getAccountsInBudget(Long budgetId, String userName) {
 		Budget budget = budgetRepository.findById(budgetId).orElseThrow(BudgetNotFoundException::new);
-		budget.getAccounts().forEach(account -> accounts.add(AccountDto.from(account)));
+		checkAccess(userName, budget.getAccounts());
+		List<AccountExpensesDto> accounts = new ArrayList<>();
+		budget.getAccounts().forEach(a -> accounts.add(AccountExpensesDto.from(a)));
 		return accounts;
+	}
+
+	@Override
+	public List<AccountDto> getUnassignedAccounts(Long budgetId, String userName) {
+		Budget budget = budgetRepository.findById(budgetId).orElseThrow(BudgetNotFoundException::new);
+		checkAccess(userName, budget.getAccounts());
+		List<Account> accounts = accountRepository.findAll();
+		budget.getAccounts().forEach(accounts::remove);
+		List<AccountDto> accountDtos = new ArrayList<>();
+		accounts.forEach(a -> accountDtos.add(AccountDto.from(a)));
+		return accountDtos;
+	}
+
+	private void checkAccess(String userName, List<Account> accounts) {
+		Account account = accountRepository.findByUsername(userName).orElseThrow(AccountNotFoundException::new);
+		if (!accounts.contains(account)) {
+			throw new BudgetNotFoundException();
+		}
 	}
 
 	@Override
@@ -66,13 +87,23 @@ public class BudgetAccountServiceImpl implements BudgetAccountService {
 	}
 
 	@Override
-	public void createNewBudget(String userName, BudgetDto dto) {
+	public BudgetDto createNewBudget(String userName, BudgetDto dto) {
 		Account account = accountRepository.findByUsername(userName).orElseThrow(AccountNotFoundException::new);
-		if(budgetRepository.findByName(dto.getName()).isPresent()){
+		if (budgetRepository.findByName(dto.getName()).isPresent()) {
 			throw new BudgetAlreadyExists();
 		}
 		Budget budget = dto.toBudget();
 		budget.getAccounts().add(account);
-		budgetRepository.save(budget);
+		return BudgetDto.from(budgetRepository.save(budget));
+	}
+
+	@Override
+	public BudgetDto findBudgetById(Long id, String userName) {
+		Budget budget = budgetRepository.findById(id).orElseThrow(BudgetNotFoundException::new);
+		Account account = accountRepository.findByUsername(userName).orElseThrow(AccountNotFoundException::new);
+		if (budget.getAccounts().contains(account)) {
+			return BudgetDto.from(budget);
+		}
+		throw new BudgetNotFoundException();
 	}
 }

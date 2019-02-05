@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Account} from './account';
-import { environment } from '../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Account} from './account';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable({
@@ -10,16 +10,21 @@ import { environment } from '../../../environments/environment';
 })
 export class AccountService {
 
-  url = `${environment.apiUrl}/accounts`;
+  url = `${environment.apiUrl}/budgets`;
 
-  constructor(private http: HttpClient) { }
-
-  getAccount(name: string): Observable<Account> {
-    const url = `${this.url}/${name}`;
-    return this.http.get<Account>(url);
+  constructor(private http: HttpClient) {
   }
 
-  getAccounts(): Observable<Account[]> {
-    return this.http.get<Account[]>(this.url);
+
+  getAccountsInBudget(budgetId: number): Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.url}/${budgetId}/accounts`);
+  }
+
+  getUnassignedAccounts(budgetId: number): Observable<Account[]> {
+    return this.http.get<Account[]>(`${this.url}/${budgetId}/unassigned`);
+  }
+
+  addAccountToBudget(accountId: number, budgetId: number): Observable<Account> {
+    return this.http.post<Account>(`${this.url}/${budgetId}/accounts`, {accountId, budgetId});
   }
 }

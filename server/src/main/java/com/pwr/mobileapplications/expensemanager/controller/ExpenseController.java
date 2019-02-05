@@ -6,8 +6,10 @@ import com.pwr.mobileapplications.expensemanager.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,8 +24,9 @@ public class ExpenseController {
 	}
 
 	@PostMapping()
-	public ResponseEntity<ExpenseDto> addExpense(@RequestBody NewExpenseDto dto){
-		return new ResponseEntity<>(expenseService.addNewExpense(dto), HttpStatus.CREATED);
+	public ResponseEntity<ExpenseDto> addExpense(@RequestBody @Valid NewExpenseDto dto){
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		return new ResponseEntity<>(expenseService.addNewExpense(dto, userName), HttpStatus.CREATED);
 	}
 
 	@GetMapping("budgets/{budgetId}")
