@@ -5,7 +5,7 @@ Projekt aplikacji do zarządzania wydatkami. Aplikacja na kurs "Aplikacje Mobiln
 ## Opis aplikacji
 Aplikacja składa się z dwóch modułów.
 
-1. Front-end stworzy w TypeScript + Angular 7
+1. Front-end stworzony w TypeScript + Angular 7
 2. Back-end stworzony w Javie 11 + Spring Boot 2
 
 Jako warstwę danych aplikacja wykorzystuje wbudowaną w JAR relacyjną bazę H2.
