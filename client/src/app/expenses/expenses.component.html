@@ -19,7 +19,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput [matDatepicker]="endDate" placeholder="Choose end date" [(ngModel)]="expenseDate" required>
+      <input matInput [matDatepicker]="endDate" placeholder="Choose expense date" [(ngModel)]="expenseDate" required>
       <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
       <mat-datepicker #endDate></mat-datepicker>
     </mat-form-field>
@@ -27,7 +27,7 @@
     <mat-form-field>
       <input type="number" matInput placeholder="Amount" [(ngModel)]="amount" required>
     </mat-form-field>
-      <button mat-flat-button color="primary" (click)="createNew()">Create</button>
+    <button mat-flat-button color="primary" (click)="createNew()">Create</button>
   </div>
 
   <div>

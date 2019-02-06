@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.security.auth.login.AccountNotFoundException;
@@ -23,14 +24,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	}
 
 	@Override
-	public UserDetails loadUserByUsername(String userName) {
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		Account account = accountRepository
+                .findByUsername(userName)
+                .orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
 
-		Account account = null;
-		try {
-			account = accountRepository.findByUsername(userName).orElseThrow(AccountNotFoundException::new);
-		} catch (AccountNotFoundException e) {
-			e.printStackTrace();
-		}
 		return new User(account.getUsername(), account.getPassword(),
 					true, true, true, true,
 					AuthorityUtils.createAuthorityList("ROLE_USER"));

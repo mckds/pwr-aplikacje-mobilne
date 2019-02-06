@@ -1,6 +1,5 @@
 package com.pwr.mobileapplications.expensemanager.service.implementation;
 
-import com.mysql.cj.util.StringUtils;
 import com.pwr.mobileapplications.expensemanager.dto.CategoryDto;
 import com.pwr.mobileapplications.expensemanager.dto.NewCategoryDto;
 import com.pwr.mobileapplications.expensemanager.exception.BudgetNotFoundException;
@@ -45,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	private void checkCategoryName(String name) {
-		if(StringUtils.isEmptyOrWhitespaceOnly(name)){
+		if(name.isBlank()){
 			throw new InvalidCategoryNameException();
 		}
 	}
