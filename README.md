@@ -38,7 +38,7 @@ docker build --tag=nazwa-obrazu .
 
 Spowoduje to uruchomienie procesu budowy obrazu.
 
-Obraz budowany jest na podstawie Dockerfile w typie _multi-stage_. Podczas budowy można wyróżnić 3 etapu:
+Obraz budowany jest na podstawie Dockerfile w typie _multi-stage_. Podczas budowy można wyróżnić 3 etapy:
 
 1. Zbudowanie fontendu 
 
